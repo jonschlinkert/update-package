@@ -1,0 +1,41 @@
+{
+  "name": "update-package",
+  "description": "Update/lint a package.json based on a defaults.",
+  "version": "0.1.0",
+  "homepage": "https://github.com/jonschlinkert/update-package",
+  "author": {
+    "name": "Jon Schlinkert",
+    "url": "https://github.com/jonschlinkert"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/jonschlinkert/update-package.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jonschlinkert/update-package/issues"
+  },
+  "license": {
+    "type": "MIT",
+    "url": "https://github.com/jonschlinkert/update-package/blob/master/LICENSE-MIT"
+  },
+  "main": "index.js",
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "scripts": {
+    "test": "mocha -R spec"
+  },
+  "devDependencies": {
+    "mocha": "*",
+    "should": "*"
+  },
+  "keywords": [
+    "foo-bar"
+  ],
+  "dependencies": {
+    "extend-shallow": "^0.2.0",
+    "load-pkg": "^1.0.0",
+    "lodash": "^3.0.1",
+    "normalize-license": "0.0.2"
+  }
+}
