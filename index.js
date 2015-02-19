@@ -1,29 +1,24 @@
 /*!
  * update-package <https://github.com/jonschlinkert/update-package>
  *
- * Copyright (c) 2015 Jon Schlinkert, contributors.
- * Licensed under the MIT license.
+ * Copyright (c) 2015, Jon Schlinkert.
+ * Licensed under the MIT License.
  */
 
 'use strict';
 
+var fs = require('fs');
 var normalize = require('normalize-pkg');
-var extend = require('extend-shallow');
+var merge = require('merge-deep');
 var pkg = require('load-pkg');
-var _ = require('lodash');
 var Fields = require('./lib/fields');
 
 module.exports = updatePackage;
 
-
 function updatePackage(config) {
-  config = extend({}, pkg, config);
-  updateConfig(config);
-  console.log(config)
+  updateConfig(merge({}, pkg, config));
+  return config;
 }
-
-
-updatePackage();
 
 function updateConfig(config) {
   var fields = new Fields(config);
@@ -36,17 +31,16 @@ function updateConfig(config) {
     return value;
   });
 
-  fields.set('licenses', function (value, key, config) {
-    return [{
-      "type": "MIT",
-      "url": "https://github.com/jonschlinkert/normalize-pkg/blob/master/LICENSE-MIT"
-    }]
+  fields.set('license', function (value, key, config) {
+    if (value && value.url) {
+      config.licenses = [value];
+    }
+    return;
   });
 
-  fields.set('license', function (value, key, config) {
-    if (config.licenses) {
-      value = config.licenses[0];
-      delete config.licenses;
+  fields.set('licenses', function (value, key, config) {
+    if (value && value[0].url && value[0].url.indexOf('LICENSE-MIT') !== -1) {
+      value[0].url = value[0].url.split('LICENSE-MIT').join('LICENSE');
     }
     return value;
   });
@@ -55,11 +49,34 @@ function updateConfig(config) {
     return value;
   });
 
+  fields.set('files', function (value, key, config) {
+    if (typeof value === 'undefined') {
+      value = ['index.js'];
+    }
+    return value;
+  });
+
+  fields.set('devDependencies', function (value, key, config) {
+    if (value.hasOwnProperty('verb-tag-jscomments')) {
+      delete value['verb-tag-jscomments'];
+      delete value.verb;
+    }
+
+    return value;
+  });
+
   fields.set('keywords', function (value, key, config) {
-    return normalize.keywords(config)[key];
+    // return normalize.keywords(config)[key];
+    return value;
+  });
+
+  fields.set('scripts', function (value, key, config) {
+    if (value.test && /mocha -r/i.test(value.test)) {
+      value.test = 'mocha';
+    }
+    return value;
   });
 
   fields.update();
   return config;
 }
-
