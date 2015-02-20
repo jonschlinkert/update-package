@@ -1,7 +1,7 @@
 {
   "name": "update-package",
   "description": "Update/lint a package.json based on a defaults.",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "homepage": "https://github.com/jonschlinkert/update-package",
   "author": {
     "name": "Jon Schlinkert",
