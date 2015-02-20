@@ -57,7 +57,7 @@ function updateConfig(config) {
   });
 
   fields.set('devDependencies', function (value, key, config) {
-    if (value.hasOwnProperty('verb-tag-jscomments')) {
+    if (typeof value === 'object' && value.hasOwnProperty('verb-tag-jscomments')) {
       delete value['verb-tag-jscomments'];
       delete value.verb;
     }
@@ -71,7 +71,7 @@ function updateConfig(config) {
   });
 
   fields.set('scripts', function (value, key, config) {
-    if (value.test && /mocha -r/i.test(value.test)) {
+    if (value && value.test && /mocha -r/i.test(value.test)) {
       value.test = 'mocha';
     }
     return value;
