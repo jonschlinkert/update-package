@@ -39,9 +39,9 @@ function updateConfig(config) {
   });
 
   fields.set('licenses', function (value, key, config) {
-    if (value && value[0].url && value[0].url.indexOf('LICENSE-MIT') !== -1) {
-      value[0].url = value[0].url.split('LICENSE-MIT').join('LICENSE');
-    }
+    // if (value && value[0].url && value[0].url.indexOf('LICENSE-MIT') !== -1) {
+    //   value[0].url = value[0].url.split('LICENSE-MIT').join('LICENSE');
+    // }
     return value;
   });
 
