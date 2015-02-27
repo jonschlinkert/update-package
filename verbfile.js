@@ -4,7 +4,6 @@ var verb = require('verb');
 var update = require('./');
 
 verb.engine('json', function json(str, options, cb) {
-  console.log(arguments)
   if (typeof options === 'function') {
     cb = options; options = {};
   }
