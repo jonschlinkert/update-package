@@ -1,8 +1,8 @@
 /*!
  * update-package <https://github.com/jonschlinkert/update-package>
  *
- * Copyright (c) 2015 Jon Schlinkert.
- * Licensed under the MIT license.
+ * Copyright (c) 2015, Jon Schlinkert.
+ * Licensed under the MIT License.
  */
 
 'use strict';
