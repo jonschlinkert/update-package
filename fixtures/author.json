@@ -1,0 +1,6 @@
+{
+  "author": {
+    "name": "<%= author.name %>",
+    "url": "<%= author.url ? author.url : 'https://github.com/<%= author.username %>'"
+  }
+}
